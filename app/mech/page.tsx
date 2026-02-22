@@ -283,8 +283,14 @@ export default function MechPage() {
                         </div>
                     </div>
 
-                    {/* Cancel button */}
-                    <div className="mt-auto">
+                    {/* Action buttons */}
+                    <div className="mt-auto space-y-2.5">
+                        <button
+                            onClick={() => router.push("/rating")}
+                            className="w-full py-3.5 rounded-2xl bg-[#D2FF1D] text-black text-sm font-bold hover:bg-[#c2ec14] active:scale-[0.98] transition-all cursor-pointer shadow-lg shadow-[#D2FF1D]/10"
+                        >
+                            Service Complete ✓
+                        </button>
                         <button className="w-full py-3.5 rounded-2xl border border-red-500/20 text-red-400 text-sm font-semibold hover:bg-red-500/10 transition-colors cursor-pointer">
                             Cancel Service
                         </button>

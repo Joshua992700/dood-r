@@ -10,11 +10,22 @@ export default function RadarPage() {
     const [found, setFound] = useState(false);
 
     useEffect(() => {
+        // 20% chance no mechanics are available
+        const mechanicAvailable = Math.random() > 0.2;
+
         const t1 = setTimeout(() => setStatusText("Detecting mechanics in your area…"), 2000);
-        const t2 = setTimeout(() => setStatusText("Mechanic found nearby!"), 4200);
-        const t3 = setTimeout(() => setFound(true), 4200);
-        const t4 = setTimeout(() => router.push("/mech"), 5500);
-        return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); clearTimeout(t4); };
+        const t2 = setTimeout(() => {
+            if (mechanicAvailable) {
+                setStatusText("Mechanic found nearby!");
+                setFound(true);
+            } else {
+                setStatusText("No mechanics available right now…");
+            }
+        }, 4200);
+        const t4 = setTimeout(() => {
+            router.push(mechanicAvailable ? "/mech" : "/no-mechanics");
+        }, 5500);
+        return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t4); };
     }, [router]);
 
     // Generate random blip positions (static across renders)
@@ -105,8 +116,8 @@ export default function RadarPage() {
                         />
                         {/* Dot */}
                         <div className={`w-3 h-3 rounded-full shadow-lg ${found && i === 4
-                                ? "bg-[#D2FF1D] shadow-[#D2FF1D]/50"
-                                : "bg-[#D2FF1D]/60 shadow-[#D2FF1D]/30"
+                            ? "bg-[#D2FF1D] shadow-[#D2FF1D]/50"
+                            : "bg-[#D2FF1D]/60 shadow-[#D2FF1D]/30"
                             }`} />
                     </motion.div>
                 ))}

@@ -417,6 +417,7 @@ export default function MainPage() {
                             {
                                 key: "home",
                                 label: "Home",
+                                route: null,
                                 icon: (
                                     <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1m-2 0h2" />
@@ -424,17 +425,19 @@ export default function MainPage() {
                                 ),
                             },
                             {
-                                key: "discover",
-                                label: "Discover",
+                                key: "history",
+                                label: "History",
+                                route: "/history",
                                 icon: (
                                     <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                     </svg>
                                 ),
                             },
                             {
                                 key: "profile",
                                 label: "Profile",
+                                route: "/profile",
                                 icon: (
                                     <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -444,7 +447,10 @@ export default function MainPage() {
                         ].map((item) => (
                             <button
                                 key={item.key}
-                                onClick={() => setActiveNav(item.key)}
+                                onClick={() => {
+                                    setActiveNav(item.key);
+                                    if (item.route) router.push(item.route);
+                                }}
                                 className="relative flex flex-col items-center gap-1 py-2 px-5 cursor-pointer group"
                             >
                                 {activeNav === item.key && (
